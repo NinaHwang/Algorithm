@@ -1,29 +1,25 @@
-answer = 0
+# https://programmers.co.kr/learn/courses/30/lessons/43163
 
-def dfs(begin, target, words):
-    global answer
-    if begin == target:
-        return
+from collections import deque
 
-    for word in words:
-        count_diffs = 0
-        for a, b in zip(begin, word):
-            print(begin)
-            print(word)
-            if a!=b:
-                count_diffs += 1
-        if count_diffs == 1:
-            begin = word
-            words.remove(word)
-            answer += 1
-            dfs(word, target, words)
 
 def solution(begin, target, words):
+    answer = 0
     if target not in words:
         return 0
-    global answer
-    dfs(begin, target, words)
-    return answer-1
+    queue = deque([begin])
+    while not target in queue:
+        for w in list(queue):
+            v = queue.popleft()
+            for word in words:
+                count_diffs = 0
+                for a, b in zip(v, word):
+                    if a != b:
+                        count_diffs += 1
+                if count_diffs == 1:
+                    queue.append(word)
+        answer += 1
+    return answer
 
 print(solution('hit', 'cog', ["hot", "dot", "dog", "lot", "log", "cog"]))
 
