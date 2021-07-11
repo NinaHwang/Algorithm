@@ -15,5 +15,7 @@ public class TestCase {
         System.out.println(Arrays.toString(answer1));
         System.out.println(Arrays.toString(answer2));
         System.out.println(Arrays.toString(answer3));
+
+
     }
 }
